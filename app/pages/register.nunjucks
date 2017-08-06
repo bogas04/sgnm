@@ -2,6 +2,39 @@
 
 {% block content %}
   <div class="register-container">
-    <iframe src="https://docs.google.com/forms/u/0/d/e/1FAIpQLSc-fTw6ULALsKdi6Y-SZH3abmKCG0OvVovUef43k53QP8PyKg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
+    <iframe id="register-form" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
   </div>
+  <script>
+    var $iframe = document.getElementById('register-form');
+    var baseURL = "https://docs.google.com/forms/d/e/1FAIpQLSc-fTw6ULALsKdi6Y-SZH3abmKCG0OvVovUef43k53QP8PyKg/viewform";
+
+    function feedURLToIframe (data) {
+      var params = [
+        "usp=pp_url",
+        "entry.1087743563=" + data.event,
+        "entry.2005620554=" + data.name,
+        "entry.1045781291=" + data.email,
+        "entry.1065046570=" + data.address,
+        "entry.1166974658=" + data.phone,
+        "entry.839337160=" + data.comment,
+      ];
+
+      $iframe.src = baseURL + "?" + params.join('&');
+    }
+
+    window.onload = function () {
+      // get data
+      var data = {
+        name: 'Divjot Singh',
+        event: "Birmingham,+July+10,+2017+-+July+16,+2017.+Address:+Guru+Nanak+Gurdwara+(+128-130+High+St,+Smethwick+B66+3AP,+UK)",
+        email:'email@email.com',
+        phone: '1234567890',
+        comment: '',
+      };
+
+      // feed data
+      feedURLToIframe(data);
+    };
+  </script>
 {% endblock %}
